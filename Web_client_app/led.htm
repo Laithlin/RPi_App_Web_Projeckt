@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+	<!-- HTML file head: web page metadata -->
+	<head>
+		<title>LED</title>
+		<!-- jQuery -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+		
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+		
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		
+		<script type="text/javascript" src="scripts/led.js"></script>
+		<link rel="stylesheet" type="text/css" href="style/led.css">
+	</head>
+
+	<!-- HTML file body: web page content -->
+	<body>
+		<h1 class="text-center h1custom">LED</h1>
+		<div id="matryca" class="container">
+			
+			<div class="row">
+				<div class="col align-self-center">
+					<ul class="nav">
+						
+						<div class="slidecontainer">
+						  <input type="range" min="100" max="255" value="0" class="slider" style="background-color: #FF0000" id="redRange" oninput="ShowColor()">
+						</div>
+						
+						<div class="slidecontainer">
+						  <input type="range" min="100" max="255" value="0" class="slider" style="background-color: #00FF00" id="greenRange" oninput="ShowColor()">
+						</div>
+						
+						<div class="slidecontainer">
+						  <input type="range" min="100" max="255" value="0" class="slider" style="background-color: #0000FF" id="blueRange" oninput="ShowColor()">
+						</div>
+						
+						<li><button id="clearbtn" onClick="ClearMatrix()" type="button" class="btn btn-secondary">CLEAR</button></li>
+						<li><button id="showbtn" type="button" class="btn btn-secondary selectitem"></button></li>			
+						<li><button id="sendbtn" onClick="SendMatrix()" type="button" class="btn btn-secondary">SET</button></li>
+					
+					</ul>
+				</div>
+				
+				<div class="col-sm">
+					<table class="nav">
+						<tr>
+							<td><button id="L00" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>				
+							<td><button id="L01" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L02" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L03" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L04" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L05" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L06" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L07" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+						</tr>
+						<tr>
+							<td><button id="L10" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>				
+							<td><button id="L11" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L12" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L13" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L14" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L15" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L16" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L17" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+						</tr>
+							<td><button id="L20" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>				
+							<td><button id="L21" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L22" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L23" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L24" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L25" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L26" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L27" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+						</tr>
+						<tr>
+							<td><button id="L30" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>				
+							<td><button id="L31" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L32" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L33" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L34" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L35" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L36" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L37" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+						</tr>
+						<tr>
+							<td><button id="L40" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>				
+							<td><button id="L41" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L42" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L43" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L44" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L45" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L46" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L47" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+						</tr>
+						<tr>
+							<td><button id="L50" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>				
+							<td><button id="L51" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L52" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L53" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L54" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L55" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L56" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L57" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+						</tr>
+						<tr>
+							<td><button id="L60" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>				
+							<td><button id="L61" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L62" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L63" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L64" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L65" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L66" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L67" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+						</tr>
+						<tr>
+							<td><button id="L70" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>				
+							<td><button id="L71" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L72" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L73" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L74" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L75" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L76" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+							<td><button id="L77" onClick="SetColor(id)" type="button" class="btn btn-primary btncustom"></button></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+			<p id="paragraph"></p>
+		</div>
+	</body>
+
+</html>

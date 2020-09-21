@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Strona glowna</title>
+		<!-- jQuery -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+		
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+		
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		
+		<script type="text/javascript" src="scripts/calculator_example.js"></script>
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+	</head>
+
+	<body>
+	
+	<div class="fixed-top">
+		<div class="collapse" id="navbarToggleExternalContent">
+			<div class="bg-light p-4">
+				<ul class="list-unstyled components">
+					<p id="menu">Menu</p>
+					<li class="active">
+						<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Sense HAT</a>
+						<ul class="collapse list-unstyled" id="homeSubmenu">
+							<li>
+								<a href="measurment.htm" class="text-danger" target="contentframe">Sense HAT measurements</a>
+							</li>
+							<li>
+								<a href="wykresy.htm" class="text-success" target="contentframe">Weather data</a>
+							</li>
+							<li>
+								<a href="IMU.htm" class="text-danger" target="contentframe">IMU data</a>
+							</li>
+							<li>
+								<a href="joy.htm" class="text-danger" target="contentframe">Joystick</a>
+							</li>
+							<li>
+								<a href="led.htm" class="text-success" target="contentframe">LED display</a>
+							</li>
+						</ul>
+						</li>
+					<li>
+						<a href="ustawienia.htm" class="text-dark" target="contentframe">Config</a>
+					</li>
+				
+					<li>
+						<a href="info.htm" class="text-info" target="contentframe">Info</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	<nav class="navbar navbar-dark bg-dark">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+		</button>
+	</nav>
+	
+		<div id="content">
+			<iframe  height="550px" width="100%" name="contentframe">Witaj</iframe>
+		<div>
+	</div>
+	
+	
+	
+	</body>
+
+</html>
