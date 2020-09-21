@@ -1,0 +1,36 @@
+.chartemp {
+	width: 33%;
+	height: 400px;
+}
+.charpres {
+	width: 33%;
+	height: 400px;
+}
+.charhum {
+	width: 33%;
+	height: 400px;
+}
+
+.datagrabber {
+	//width: 1000px;
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+}
+
+.menuitem {
+	height: 60px;
+	margin-right: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+#start {
+	background-color: green;
+}
+#stop {
+	background-color: red;
+}

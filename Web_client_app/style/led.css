@@ -1,0 +1,135 @@
+.matryca {
+	width: 415px;
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+}
+
+.menuitem {
+	height: 40px;
+  width: 40px;
+	margin-right: 10px;
+  margin-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+#showbtn{
+  height: 60px;
+  width: 139px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+#clearbtn {
+  height: 60px;
+  width: 139px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+	background: green;
+}
+
+#sendbtn {
+  height: 60px;
+  width: 139px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+	background: orange;
+}
+
+.h1custom {
+	margin-bottom: 20px;
+}
+
+.btncustom {
+	width: 50px;
+	height: 50px;
+	padding-right: 0px;
+	padding-left: 0px;
+	background-color: grey;
+}
+
+.outcustom {
+	text-align: right;
+	margin-bottom: 2px;
+	direction: rtl;
+	overflow: hidden;
+}
+
+.tbcustom {
+	width: 250px;
+	height: 250px;
+}
+
+.divcustom {
+	max-width: 430px;
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+}
+
+.csbutton {
+	max-width: 158px;
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+}
+
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #000000; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #000000; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
