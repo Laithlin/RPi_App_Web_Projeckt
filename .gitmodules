@@ -1,0 +1,3 @@
+[submodule "WeatherStation"]
+	path = WeatherStation
+	url = https://github.com/lukjarnut/WeatherStation.git
