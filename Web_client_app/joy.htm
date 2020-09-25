@@ -2,7 +2,7 @@
 <html>
 
 	<head>
-		<title>Strona glowna</title>
+		<title>Joystick</title>
 		<!-- jQuery -->
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
 		
@@ -11,6 +11,10 @@
 		
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		
+		<!-- Chart.js library -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+		
 		
 		<script type="text/javascript" src="scripts/joy.js"></script>
 		<link rel="stylesheet" type="text/css" href="style/joy.css">
@@ -22,9 +26,13 @@
 			<h1>Joystick</h1>
 		</div>
 		
-		<div id="joy" class="container border border-primary rounded datagrabber">
+		<div id="datagrabber" class="container border border-primary rounded datagrabber">
 		
 				<canvas id="joy"></canvas>
+		
+		</div>
+		<div id="count">
+			<h3><p id="paragraph"></p></h3>
 		
 		</div>
 
