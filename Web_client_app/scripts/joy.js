@@ -1,40 +1,60 @@
+const sampleTimeSec = 0.1;
+const sampleTimeMsec = 1000*sampleTimeSec;
 var xdata = 0;
 var ydata = 0;
-var step = 1;
+var click_button = 0;
+
 
 var joy;
+
+var url = "http://192.168.8.126/webapp/joystick.php";
+
+function addDataJoyX(x_poz){
+	
+	xdata = x_poz;
+	joy.update();
+}
+
+function addDataJoyY(y_poz){
+	
+	ydata = y_poz;
+	joy.update();
+}
+
+function addDataJoyB(butt){
+	
+	click_button = butt;
+}
+
+function startTimer(){
+	timer = setInterval(ajaxJSON, sampleTimeMsec);
+}
+
+function ajaxJSON() {
+	$.ajax(url, {
+		type: 'GET', dataType: 'json',
+		success: function(responseJSON, status, xhr) {
+			addDataJoyX(+responseJSON.Joystick.x);
+			addDataJoyY(+responseJSON.Joystick.y);
+			addDataJoyB(+responseJSON.Joystick.b);
+		}
+	});
+}
 
 function chartInit()
 {
 
-	xdata = [...Array(maxSamplesNumber).keys()]; 
 
-	xdata.forEach(function(p, i) {this[i] = (this[i]*sampleTimeSec).toFixed(4);}, xdata);
+	chartContextTemp = $("#joy")[0].getContext('2d');
 
-
-	lastTimeStamp = +xdata[xdata.length-1]; 
-
-
-	tdata = [];
-
-
-	// get chart context from 'canvas' element
-	chartContextTemp = $("#temp")[0].getContext('2d');
-
-var scatterChart = new Chart(ctx, {
+var scatterChart = new Chart(chartContextTemp, {
     type: 'scatter',
     data: {
         datasets: [{
             label: 'Scatter Dataset',
             data: [{
-                x: -10,
-                y: 0
-            }, {
-                x: 0,
-                y: 10
-            }, {
-                x: 10,
-                y: 5
+                x: xdata,
+                y: ydata
             }]
         }]
     },
@@ -48,56 +68,17 @@ var scatterChart = new Chart(ctx, {
     }
 });
 
-	joy = new Chart(chartContextTemp, {
-		// The type of chart: linear plot
-		type: 'line',
+}
 
-		// Dataset: 'xdata' as labels, 'ydata' as dataset.data
-		data: {
-			labels: xdata,
-			datasets: [{
-				fill: false,
-				label: 'Temperature',
-				backgroundColor: 'rgb(255, 0, 0)',
-				borderColor: 'rgb(255, 0, 0)',
-				data: tdata,
-				lineTension: 0
-			}]
-		},
-
-		// Configuration options
-		options: {
-			responsive: true,
-			maintainAspectRatio: false,
-			animation: false,
-			scales: {
-				yAxes: [{
-					scaleLabel: {
-						display: true,
-						labelString: 'Temperature'
-					}
-				}],
-				xAxes: [{
-					scaleLabel: {
-						display: true,
-						labelString: 'Time [s]'
-					}
-				}]
-			}
-		}
-		
-	});
-	
-	
-	tdata = temp.data.datasets[0].data;
-
-	xdata = hum.data.labels;
+function showClick()
+{
+	var count_click = "Button:" + click_button;
+	document.getElementById("paragraph").innerHTML = count_click;
 }
 
 $(document).ready(() => { 
+	startTimer();
 	chartInit();
-	$("#start").click(startTimer);
-	$("#stop").click(stopTimer);
-	$("#sampletime").text(sampleTimeMsec.toString());
-	$("#samplenumber").text(maxSamplesNumber.toString());
+	showClick();
+
 });
