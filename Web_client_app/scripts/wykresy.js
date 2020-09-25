@@ -17,7 +17,7 @@ var hum;
 
 var timer; 
 
-const url = 'http://192.168.56.103/senseweb/weatherdata.json'; 
+var url = 'http://192.168.56.103/senseweb/weatherdata.json'; 
 
 
 
