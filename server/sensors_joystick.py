@@ -14,30 +14,25 @@ import json
 
 sense = SenseHat()
 
-y_position = 0
-x_position = 0
-b_counter = 0
+y_position = x_position = b_counter = 0
+
+fil = open('joystick.dat', 'w') #joystick current state
 
 ## Main loop
 try:
     while True:
         ## Sensing events
         for event in sense.stick.get_events():
-            if event.action == "pressed":
+            if event.action in ('pressed', 'held'):
                 fil = open('joystick.dat', 'w') #joystick current state
-                if event.direction == "up":
-                    y_position += 1
-                if event.direction == "down":
-                    y_position -= 1
-                if event.direction == "left":
-                    x_position -= 1
-                if event.direction == "right":
-                    x_position += 1
-                if event.direction == "middle":
-                    b_counter += 1
+                x_position = (x_position + {'left': -1, 'right': 1,}.get(event.direction, 0))
+                y_position = (y_position + {'up': -1, 'down': 1,}.get(event.direction, 0))
+                if event.action in ('pressed'):
+                    b_counter = (b_counter + {'middle': 1,}.get(event.direction, 0))
+                if event.action in ('held'):
+                    b_counter = (b_counter + {'middle': -1,}.get(event.direction, 0))
 
                 json_data = json.dumps({"Joystick":{"x":x_position,"y":y_position,"button":b_counter}}) #creating json
-
                 fil.write(json_data)#writing json to file
                 fil.write('\n')
                 fil.close()
@@ -45,3 +40,5 @@ try:
 except (KeyboardInterrupt, SystemExit):
     fil.close()
     exit()
+
+#-----------------------------------------------------------------------------------------------------
