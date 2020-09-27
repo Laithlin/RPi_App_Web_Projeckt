@@ -7,7 +7,40 @@ var click_button = 0;
 
 var joy;
 
-var url = "http://192.168.8.126/webapp/joystick.php";
+var urlData = "http://192.168.8.126/app/joystick.json";
+var urlSet = "http://192.168.1.126/app/settings.json";;
+
+function addUrl(t) {
+	urlData = t + "joystick.json";
+	return urlData;
+}
+
+function addPort(p) {
+	port = p;
+	return port;
+}
+
+function addSampleTime(s) {
+	sampleTime = s;
+	return sampleTime;
+}
+
+function addMaxSampleNumber(m) {
+	maxSampleNum = m;
+	return maxSampleNum;
+} 
+
+function getSettings() {
+	$.ajax(urlSet, {
+		type: 'GET', dataType: 'json',
+		success: function(responseJSON, status, xhr) {
+			addUrl(+responseJSON.url);
+			addPort(+responseJSON.port);
+			addSampleTime(+responseJSON.sampleTime);
+			addMaxSampleNumber(+responseJSON.maxSampleNum);
+		}
+	});
+}
 
 function addDataJoyX(x_poz){
 	
@@ -31,12 +64,12 @@ function startTimer(){
 }
 
 function ajaxJSON() {
-	$.ajax(url, {
+	$.ajax(urlData, {
 		type: 'GET', dataType: 'json',
 		success: function(responseJSON, status, xhr) {
 			addDataJoyX(+responseJSON.Joystick.x);
 			addDataJoyY(+responseJSON.Joystick.y);
-			addDataJoyB(+responseJSON.Joystick.b);
+			addDataJoyB(+responseJSON.Joystick.button);
 		}
 	});
 }
@@ -77,6 +110,7 @@ function showClick()
 }
 
 $(document).ready(() => { 
+	getSettings();
 	startTimer();
 	chartInit();
 	showClick();

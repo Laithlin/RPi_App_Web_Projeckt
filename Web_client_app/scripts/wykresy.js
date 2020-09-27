@@ -17,7 +17,40 @@ var hum;
 
 var timer; 
 
-var url = 'http://192.168.56.103/senseweb/weatherdata.json'; 
+var urlData = 'http://192.168.56.103/web/data.json';
+var urlSet = "http://192.168.1.126/web/settings.json";;
+
+function addUrl(t) {
+	urlData = t + "data.json";
+	return urlData;
+}
+
+function addPort(p) {
+	port = p;
+	return port;
+}
+
+function addSampleTime(s) {
+	sampleTime = s;
+	return sampleTime;
+}
+
+function addMaxSampleNumber(m) {
+	maxSampleNum = m;
+	return maxSampleNum;
+} 
+
+function getSettings() {
+	$.ajax(urlSet, {
+		type: 'GET', dataType: 'json',
+		success: function(responseJSON, status, xhr) {
+			addUrl(+responseJSON.url);
+			addPort(+responseJSON.port);
+			addSampleTime(+responseJSON.sampleTime);
+			addMaxSampleNumber(+responseJSON.maxSampleNum);
+		}
+	});
+}
 
 
 
@@ -73,12 +106,12 @@ function stopTimer(){
 
 
 function ajaxJSON() {
-	$.ajax(url, {
+	$.ajax(urlData, {
 		type: 'GET', dataType: 'json',
 		success: function(responseJSON, status, xhr) {
-			addDataTemp(+responseJSON.WeatherStation.temperature);
-			addDataPres(+responseJSON.WeatherStation.pressure);
-			addDataHum(+responseJSON.WeatherStation.humidity);
+			addDataTemp(+responseJSON.data.THP.temperature);
+			addDataPres(+responseJSON.data.THP.pressure);
+			addDataHum(+responseJSON.data.THP.humidity);
 		}
 	});
 }
@@ -231,6 +264,7 @@ function chartInit()
 }
 
 $(document).ready(() => { 
+	getSettings();
 	chartInit();
 	$("#start").click(startTimer);
 	$("#stop").click(stopTimer);
