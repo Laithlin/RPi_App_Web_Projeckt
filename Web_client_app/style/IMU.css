@@ -1,17 +1,12 @@
-/*
-    figures style
-*/
-
-
-.chartemp {
+.charroll {
 	width: 33%;
 	height: 400px;
 }
-.charpres {
+.charpitch {
 	width: 33%;
 	height: 400px;
 }
-.charhum {
+.charyaw {
 	width: 33%;
 	height: 400px;
 }
@@ -33,11 +28,6 @@
 	justify-content: center;
 	flex-direction: column;
 }
-
-/*
-    buttons style
-*/
-
 #start {
 	background-color: green;
 }

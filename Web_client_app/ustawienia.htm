@@ -12,7 +12,11 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 		
+
+		<script type="text/javascript" src="scripts/ustawienia.js"></script>
+
 		<script type="text/javascript" src="scripts/led.js"></script>
+
 		<link rel="stylesheet" type="text/css" href="style/ustawienia.css">
 	</head>
 
@@ -38,13 +42,29 @@
 
 				<form>
 					<label for="velocity">Sample time:</label>
+
+					<input id="sampleTime" type="text" size="50"></input>
+
 					<input id="sample_time" type="text" size="50"></input>
+
 				</form>
 
 				<form>
 					<label for="velocity">Max sample number:</label>
+
+					<input id="maxSampleNum" type="text" size="50"></input>
+				</form>
+			<br>
+			<br>
+			<div class="row justify-content-center">
+				<div class="col-4">
+					<button id="btn" type="button" class="btn btn-outline-success">Set</button>
+				</div>
+				<p id="paragraph"></p>
+
 					<input id="m_sample_num" type="text" size="50"></input>
 				</form>
+
 		</div>
 		
 	</body>

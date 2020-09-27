@@ -4,7 +4,44 @@ var cleraIdiotTry = "[3,0,0,0,0][3,1,0,0,0][3,2,0,0,0][3,3,0,0,0][3,4,0,0,0][3,5
 
 var msgMap = new Map();
 
-var url = "http://192.168.8.126/webapp/led_display.php";
+var sampleTime = 0.1;
+var sampleTimeMsek = sampleTime*1000;
+var maxSampleNum = 100;
+var port = 22;
+var urlData = "http://192.168.1.126/app/led_display.php";
+var urlSet = "http://192.168.1.126/app/settings.json";;
+
+function addUrl(t) {
+	urlData = t + "led_display.php";
+	return urlData;
+}
+
+function addPort(p) {
+	port = p;
+	return port;
+}
+
+function addSampleTime(s) {
+	sampleTime = s;
+	return sampleTime;
+}
+
+function addMaxSampleNumber(m) {
+	maxSampleNum = m;
+	return maxSampleNum;
+} 
+
+function getSettings() {
+	$.ajax(urlSet, {
+		type: 'GET', dataType: 'json',
+		success: function(responseJSON, status, xhr) {
+			addUrl(+responseJSON.url);
+			addPort(+responseJSON.port);
+			addSampleTime(+responseJSON.sampleTime);
+			addMaxSampleNumber(+responseJSON.maxSampleNum);
+		}
+	});
+}
 
 function ClearMatrix(){
   for (var i = 0; i < btnIndexArray.length; i++) {
@@ -18,7 +55,7 @@ function SendClearRequest(){
   for (var i = 0; i < btnIndexArray.length; i++) {
    msg = msg + msgMap[btnIndexArray[i]];
   }
-  $.post(url,
+  $.post(urlData,
     { msgMap
     },
     function(data, status){
@@ -37,7 +74,13 @@ function SendMatrix(){
       msgArray.push("[" + x.toString() + "," + y.toString() + "," + RGBToValue(color).toString() + "]");
     }
   }
-  $("#paragraph").html(msgArray.toString());
+  $.ajax({
+		url: urlData,
+		type: "POST",
+		data: msgArray,
+		}).done(function(response) {
+			 console.log("Zapisano pozytywnie: ", response);
+ });
 }
 
 function LedColorNotNull(idx){
@@ -47,7 +90,7 @@ function LedColorNotNull(idx){
 function RGBToValue(color){
   color = color.toString();
   var str = color.slice(color.indexOf("(")+1,color.indexOf(")"));
-  //$("#paragraph").html("<b>Click counter: </b>" + str.toString());
+  
   return str;
 }
 
@@ -82,6 +125,8 @@ function WebAppInit(){
 }
 
 $(document).ready(()=>{
+	getSettings();
   WebAppInit();
+  
 
 });
