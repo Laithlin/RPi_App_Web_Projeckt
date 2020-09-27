@@ -1,3 +1,13 @@
+/**
+* Web script for Rpi to use SenseHat Joystick
+* Based on materials from  classes
+* author: Justyna S.
+*/ 
+
+/**
+* @brief variables for script
+*/
+
 const sampleTimeSec = 0.1;
 const sampleTimeMsec = 1000*sampleTimeSec;
 var xdata = 0;

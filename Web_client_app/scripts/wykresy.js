@@ -1,3 +1,13 @@
+
+/**
+* Web script for Rpi to use SenseHat THP sensors
+* Based on materials from  classes
+* author: Justyna S.
+*/ 
+
+/**
+* @brief variables for script
+*/
 const sampleTimeSec = 0.1; 					
 const sampleTimeMsec = 1000*sampleTimeSec;	
 const maxSamplesNumber = 100;				
@@ -18,7 +28,12 @@ var hum;
 var timer; 
 
 var urlData = 'http://192.168.56.103/web/data.json';
-var urlSet = "http://192.168.1.126/web/settings.json";;
+var urlSet = "http://192.168.1.126/web/settings.json";
+
+/**
+* @brief overwrite variables settings data, 
+* 			which are url, port, sample time and maximum sample number
+*/
 
 function addUrl(t) {
 	urlData = t + "data.json";
@@ -40,6 +55,10 @@ function addMaxSampleNumber(m) {
 	return maxSampleNum;
 } 
 
+/**
+* @brief receiving settings JSON data from sevrer
+*/
+
 function getSettings() {
 	$.ajax(urlSet, {
 		type: 'GET', dataType: 'json',
@@ -52,7 +71,9 @@ function getSettings() {
 	});
 }
 
-
+/**
+* @brief adding data to figures of temperature, humidity and pressure
+*/
 
 function addDataTemp(t){
 	if(tdata.length > maxSamplesNumber)
@@ -87,6 +108,12 @@ function addDataHum(h){
 	hum.update();
 }
 
+/**
+* @brief removing old data 
+*
+* when length of data container is greater than 
+* maximum sample number, first receiving data are removed 
+*/
 
 function removeOldData(){
 	xdata.splice(0,1);
@@ -95,15 +122,25 @@ function removeOldData(){
 	hdata.splice(0,1);
 }
 
+/**
+* @brief start timer after click
+*/
+
 function startTimer(){
 	timer = setInterval(ajaxJSON, sampleTimeMsec);
 }
 
+/**
+* @brief stop timer after click
+*/
 
 function stopTimer(){
 	clearInterval(timer);
 }
 
+/**
+* @brief receiving THP JSON data from server
+*/
 
 function ajaxJSON() {
 	$.ajax(urlData, {
@@ -116,6 +153,9 @@ function ajaxJSON() {
 	});
 }
 
+/**
+* @brief initialization of the figure 
+*/
 
 function chartInit()
 {
