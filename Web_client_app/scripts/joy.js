@@ -1,3 +1,4 @@
+
 /**
 * Web script for Rpi to use SenseHat Joystick
 * Based on materials from  classes
@@ -16,6 +17,7 @@ var click_button = 0;
 
 
 var joy;
+
 
 var urlData = "http://192.168.8.126/app/joystick.json";
 var urlSet = "http://192.168.1.126/app/settings.json";;
@@ -52,6 +54,9 @@ function getSettings() {
 	});
 }
 
+var url = "http://192.168.8.126/webapp/joystick.php";
+
+
 function addDataJoyX(x_poz){
 	
 	xdata = x_poz;
@@ -74,12 +79,20 @@ function startTimer(){
 }
 
 function ajaxJSON() {
+
 	$.ajax(urlData, {
+
+	$.ajax(url, {
+
 		type: 'GET', dataType: 'json',
 		success: function(responseJSON, status, xhr) {
 			addDataJoyX(+responseJSON.Joystick.x);
 			addDataJoyY(+responseJSON.Joystick.y);
+
 			addDataJoyB(+responseJSON.Joystick.button);
+
+			addDataJoyB(+responseJSON.Joystick.b);
+
 		}
 	});
 }
@@ -120,7 +133,9 @@ function showClick()
 }
 
 $(document).ready(() => { 
+
 	getSettings();
+
 	startTimer();
 	chartInit();
 	showClick();
