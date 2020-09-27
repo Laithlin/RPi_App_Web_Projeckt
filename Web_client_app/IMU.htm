@@ -1,5 +1,6 @@
 <html>
-
+	
+	<!-- HTML head metadata -->
 	<head>
 		<title>IMU</title>
 		<!-- jQuery -->
@@ -11,11 +12,14 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 		
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+		
 		<script type="text/javascript" src="scripts/IMU.js"></script>
 		<link rel="stylesheet" type="text/css" href="style/IMU.css">
 	</head>
 
 	<body>
+	<h1 class="text-center">IMU</h1>
 	
 	<div class="col-align-self-start">
 		<p>
@@ -24,33 +28,39 @@
 		  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3">Yaw</button>
 		  <button class="btn btn-outline-success" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2 multiCollapseExample3">All</button>
 		</p>				
-	</div>		
+	</div>	
+	<div class="col-align-self-center">
+		<ul class="nav">
+			<li><button id="start" type="button" class="btn btn-outline-success">Start</button></li>
+			<li><button id="stop" type="button" class="btn btn-outline-danger">Stop</button></li>			
+		</ul>
+	</div>	
 		
 	<div class="row">
 	  <div class="col">
 		<div class="collapse multi-collapse" id="multiCollapseExample1">
 		  <div class="card card-body">
-		
-			<p id="roll_data"></p>
-			
+				<div class="charroll">
+					<canvas id="roll"></canvas>
+				</div>
 		  </div>
 	    </div>
 	  </div>
 		<div class="col">
 			<div class="collapse multi-collapse" id="multiCollapseExample2">
 				 <div class="card card-body">
-					
-					<p id="pitch_data"></p>
-					
+					<div class="charpitch">
+						<canvas id="pitch"></canvas>
+					</div>
 				 </div>
 			</div>
 		</div>
 		  <div class="col">
 			<div class="collapse multi-collapse" id="multiCollapseExample3">
 			  <div class="card card-body">
-				
-				<p id="yaw_data"></p>
-				
+				<div class="charyaw">
+						<canvas id="yaw"></canvas>
+					</div>
 			  </div>
 			</div>
 		  </div>
