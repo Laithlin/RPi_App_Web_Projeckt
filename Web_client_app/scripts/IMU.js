@@ -1,77 +1,37 @@
-
 /**
 * Web script for Rpi to use SenseHat IMU sensors
 * Based on materials from  classes
 * author: Justyna S.
-*/
+*/ 
 
 /**
 * @brief variables for script
 */
 
-const sampleTimeSec = 0.1;
+const sampleTimeSec = 0.1; 	
 const sampleTimeMsec = 1000*sampleTimeSec;
-const maxSamplesNumber = 100;
+const maxSamplesNumber = 100;	
 var datar;
 var datap;
 var datay;
 
 
-var xdata;
-var lastTimeStamp;
+var xdata;  
+var lastTimeStamp; 
 
-var chartContextRoll;
+var chartContextRoll;  
 var chartContextPitch;
 var chartContextYaw;
 var roll;
 var pitch;
 var yaw;
 
-var timer;
+var timer; 
 
-var urlData = "http://192.168.8.126/RPi_App_Web_Projeckt/server/data.json";
-var urlSet = "http://192.168.8.126/RPi_App_Web_Projeckt/server/settings.json";;
+var urlData = "http://192.168.8.126/RPi_App_Web_Projeckt/server/chartdata_2.json";
+var urlAd;
 
-/**
-* @brief overwrite variables settings data,
-* 			which are url, port, sample time and maximum sample number
-*/
 
-function addUrl(t) {
-	urlData = t + "data.php";
-	return urlData;
-}
-
-function addPort(p) {
-	port = p;
-	return port;
-}
-
-function addSampleTime(s) {
-	sampleTimeSec = s;
-	return sampleTime;
-}
-
-function addMaxSampleNumber(m) {
-	maxSampleNumber = m;
-	return maxSampleNum;
-}
-
-/**
-* @brief receiving settings JSON data from sevrer
-*/
-
-function getSettings() {
-	$.ajax(urlSet, {
-		type: 'GET', dataType: 'json',
-		success: function(responseJSON, status, xhr) {
-			addUrl(+responseJSON.url);
-			addPort(+responseJSON.port);
-			addSampleTime(+responseJSON.sampleTime);
-			addMaxSampleNumber(+responseJSON.maxSampleNum);
-		}
-	});
-}
 
 /**
 * @brief adding data to figures of roll, oeach and yaw
@@ -84,7 +44,7 @@ function addDataIMUR(r){
 		lastTimeStamp += sampleTimeSec;
 		xdata.push(lastTimeStamp.toFixed(4));
 	}
-	datar.push(t);
+	datar.push(r);
 	roll.update();
 }
 
@@ -95,7 +55,7 @@ function addDataIMUP(p){
 		lastTimeStamp += sampleTimeSec;
 		xdata.push(lastTimeStamp.toFixed(4));
 	}
-	datap.push(t);
+	datap.push(p);
 	pitch.update();
 }
 
@@ -106,15 +66,15 @@ function addDataIMUY(y){
 		lastTimeStamp += sampleTimeSec;
 		xdata.push(lastTimeStamp.toFixed(4));
 	}
-	datay.push(t);
+	datay.push(y);
 	yaw.update();
 }
 
 /**
-* @brief removing old data
+* @brief removing old data 
 *
-* when length of data container is greater than
-* maximum sample number, first receiving data are removed
+* when length of data container is greater than 
+* maximum sample number, first receiving data are removed 
 */
 
 function removeOldData(){
@@ -128,36 +88,9 @@ function removeOldData(){
 * @brief start timer after click
 */
 
-=======
-const sampleTimeSec = 0.1;
-const sampleTimeMsec = 1000*sampleTimeSec;
-var datar = 0;
-var datap = 0;
-var datay = 0;
-
-var url = "http://192.168.8.126/RPi_App_Web_Projeckt/server/joystick.php";
-
-
-function addDataIMUR(r)
-{
-	datar = r;
-}
-
-function addDataIMUP(p)
-{
-	datap = p;
-}
-
-function addDataIMUY(y)
-{
-	datay = y;
-}
-
-
 function startTimer(){
 	timer = setInterval(ajaxJSON, sampleTimeMsec);
 }
-
 
 /**
 * @brief stop timer after click
@@ -178,38 +111,28 @@ function ajaxJSON() {
 			addDataIMUR(+responseJSON.data.RPY.roll);
 			addDataIMUP(+responseJSON.data.RPY.pitch);
 			addDataIMUY(+responseJSON.data.RPY.yaw);
-=======
-function ajaxJSON() {
-	$.ajax(url, {
-		type: 'GET', dataType: 'json',
-		success: function(responseJSON, status, xhr) {
-			addDataIMUR(+responseJSON.Orientation.roll);
-			addDataIMUP(+responseJSON.Orientation.pitch);
-			addDataIMUY(+responseJSON.Orientation.yaw);
-
 		}
 	});
 }
 
-
 /**
-* @brief initialization of the figure
+* @brief initialization of the figure 
 */
 
 function chartInit()
 {
 
-	xdata = [...Array(maxSamplesNumber).keys()];
+	xdata = [...Array(maxSamplesNumber).keys()]; 
 
 	xdata.forEach(function(p, i) {this[i] = (this[i]*sampleTimeSec).toFixed(4);}, xdata);
 
 
-	lastTimeStamp = +xdata[xdata.length-1];
+	lastTimeStamp = +xdata[xdata.length-1]; 
 
 
 	datar = [];
-	datap = [];
-	datay = [];
+	datap = []; 
+	datay = []; 
 
 	// get chart context from 'canvas' element
 	chartContextRoll = $("#roll")[0].getContext('2d');
@@ -253,7 +176,7 @@ function chartInit()
 				}]
 			}
 		}
-
+		
 	});
 	pitch = new Chart(chartContextPitch, {
 		// The type of chart: linear plot
@@ -292,7 +215,7 @@ function chartInit()
 				}]
 			}
 		}
-
+		
 	});
 	yaw = new Chart(chartContextYaw, {
 		// The type of chart: linear plot
@@ -331,9 +254,9 @@ function chartInit()
 				}]
 			}
 		}
-
+		
 	});
-
+	
 	datar = roll.data.datasets[0].data;
 	datap = pitch.data.datasets[0].data;
 	datay = yaw.data.datasets[0].data;
@@ -344,27 +267,25 @@ function chartInit()
 
 
 
-$(document).ready(() => {
-	getSettings();
+$(document).ready(() => { 
+	$.ajax({
+        url: 'settings.json',
+		type: 'GET', dataType: 'json',
+		success: function(responseJSON, status, xhr) {
+			
+			urlAd = responseJSON.url;
+			port = responseJSON.port;
+			sampleTimeSec = +responseJSON.sampleTime;
+			sampleTimeMsec = sampleTimeMsec / 1000;
+			maxSamplesNumber = +responseJSON.maxSamplesNum;
+
+			
+			
+		},
+	});
 	chartInit();
 	$("#start").click(startTimer);
 	$("#stop").click(stopTimer);
-
-=======
-function schowClick()
-{
-	var roll_d = "Roll:" + datar;
-	var pitch_d = "Pitch:" + datap;
-	var yaw_d = "Yaw:" + datay;
-
-	document.getElementById("roll_data").innerHTML = roll_d;
-	document.getElementById("pitch_data").innerHTML = pitch_d;
-	document.getElementById("yaw_data").innerHTML = yaw_d;
-}
-
-$(document).ready(() => {
-	startTimer();
-	showClick();
 
 
 });
