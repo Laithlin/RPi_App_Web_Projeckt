@@ -10,34 +10,33 @@
 
 import sys
 from sense_hat import SenseHat
-
+import time
 ## Setting up variables
 
 sense = SenseHat()
 
+fil = open('chartdata.dat', 'w') #joystick current state
 ## Getting data from sensors
+try:
 
-def getresource(id):
-    res = '[null]'
-    if id == 'env':
+    while True:
         t = sense.get_temperature()
         p = sense.get_pressure()
         h = sense.get_humidity()
-        res = ('[{"name":"temperature","value":' + str(t) + ',"unit":"C"},' +
-               '{"name":"pressure","value":' + str(p) + ',"unit":"hPa"},'  +
-               '{"name":"humidity","value":' + str(h) + ',"unit":"%"},'    +
-               '{"name":"random","value":' + str(rnd.random()) + ',"unit":"-"}]')
-
-    if id == 'rpy':
         rpy = sense.get_orientation_degrees()
         res = ('[{"name":"roll","value":' + str(rpy['roll']) + ',"unit":"deg"},'   +
                 '{"name":"pitch","value":' + str(rpy['pitch']) + ',"unit":"deg"},' +
                 '{"name":"yaw","value":' + str(rpy['yaw']) + ',"unit":"deg"},'     +
+                '{"name":"random","value":' + str(rnd.random()) + ',"unit":"-"} +
+                '{"name":"temperature","value":' + str(t) + ',"unit":"C"},' +
+                '{"name":"pressure","value":' + str(p) + ',"unit":"hPa"},'  +
+                '{"name":"humidity","value":' + str(h) + ',"unit":"%"},'    +
                 '{"name":"random","value":' + str(rnd.random()) + ',"unit":"-"}]')
+        fil.write(res)
+        fil.write('\n')
+        fil.close()
+        time.sleep(0.01)
 
-    return res
-
-if len(sys.argv) > 1:
-    print(getresource(sys.argv[1]))
-else:
-    print('[]')
+except (KeyboardInterrupt, SystemExit):
+    fil.close()
+    exit()
