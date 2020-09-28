@@ -15,7 +15,7 @@ import time
 
 sense = SenseHat()
 
-fil = open('chartdata.dat', 'w') #joystick current state
+fil = open('chartdata.json', 'w')
 ## Getting data from sensors
 try:
 
@@ -24,14 +24,13 @@ try:
         p = sense.get_pressure()
         h = sense.get_humidity()
         rpy = sense.get_orientation_degrees()
-        res = ('[{"name":"roll","value":' + str(rpy['roll']) + ',"unit":"deg"},'   +
-                '{"name":"pitch","value":' + str(rpy['pitch']) + ',"unit":"deg"},' +
-                '{"name":"yaw","value":' + str(rpy['yaw']) + ',"unit":"deg"},'     +
-                '{"name":"random","value":' + str(rnd.random()) + ',"unit":"-"} +
-                '{"name":"temperature","value":' + str(t) + ',"unit":"C"},' +
-                '{"name":"pressure","value":' + str(p) + ',"unit":"hPa"},'  +
-                '{"name":"humidity","value":' + str(h) + ',"unit":"%"},'    +
-                '{"name":"random","value":' + str(rnd.random()) + ',"unit":"-"}]')
+        res = ('[{"name":"roll","value":' + str(rpy['roll']) + ',"unit":"deg"},'    +
+                '{"name":"pitch","value":' + str(rpy['pitch']) + ',"unit":"deg"},'  +
+                '{"name":"yaw","value":' + str(rpy['yaw']) + ',"unit":"deg"},'      +
+                '{"name":"temperature","value":' + str(t) + ',"unit":"C"},'         +
+                '{"name":"pressure","value":' + str(p) + ',"unit":"hPa"},'          +
+                '{"name":"humidity","value":' + str(h) + ',"unit":"%"}]')
+        fil = open('chartdata.json', 'w')
         fil.write(res)
         fil.write('\n')
         fil.close()
