@@ -1,9 +1,8 @@
-
 /**
 * Web script for Rpi to use SenseHat Joystick
 * Based on materials from  classes
 * author: Justyna S.
-*/
+*/ 
 
 /**
 * @brief variables for script
@@ -18,59 +17,23 @@ var click_button = 0;
 
 var joy;
 
-
 var urlData = "http://192.168.8.126/RPi_App_Web_Projeckt/server/joystick.json";
-var urlSet = "http://192.168.8.126/RPi_App_Web_Projeckt/server/settings.json";;
-
-function addUrl(t) {
-	urlData = t + "joystick.json";
-	return urlData;
-}
-
-function addPort(p) {
-	port = p;
-	return port;
-}
-
-function addSampleTime(s) {
-	sampleTime = s;
-	return sampleTime;
-}
-
-function addMaxSampleNumber(m) {
-	maxSampleNum = m;
-	return maxSampleNum;
-}
-
-function getSettings() {
-	$.ajax(urlSet, {
-		type: 'GET', dataType: 'json',
-		success: function(responseJSON, status, xhr) {
-			addUrl(+responseJSON.url);
-			addPort(+responseJSON.port);
-			addSampleTime(+responseJSON.sampleTime);
-			addMaxSampleNumber(+responseJSON.maxSampleNum);
-		}
-	});
-}
-
-var url = "http://192.168.8.126/RPi_App_Web_Projeckt/server/joystick.php";
-
+var urlAd;
 
 function addDataJoyX(x_poz){
-
+	
 	xdata = x_poz;
 	joy.update();
 }
 
 function addDataJoyY(y_poz){
-
+	
 	ydata = y_poz;
 	joy.update();
 }
 
 function addDataJoyB(butt){
-
+	
 	click_button = butt;
 }
 
@@ -79,20 +42,12 @@ function startTimer(){
 }
 
 function ajaxJSON() {
-
 	$.ajax(urlData, {
-
-	$.ajax(url, {
-
 		type: 'GET', dataType: 'json',
 		success: function(responseJSON, status, xhr) {
 			addDataJoyX(+responseJSON.Joystick.x);
 			addDataJoyY(+responseJSON.Joystick.y);
-
 			addDataJoyB(+responseJSON.Joystick.button);
-
-			addDataJoyB(+responseJSON.Joystick.b);
-
 		}
 	});
 }
@@ -100,10 +55,9 @@ function ajaxJSON() {
 function chartInit()
 {
 
-
 	chartContextTemp = $("#joy")[0].getContext('2d');
 
-var scatterChart = new Chart(chartContextTemp, {
+	joy = new Chart(chartContextTemp, {
     type: 'scatter',
     data: {
         datasets: [{
@@ -132,10 +86,23 @@ function showClick()
 	document.getElementById("paragraph").innerHTML = count_click;
 }
 
-$(document).ready(() => {
+$(document).ready(() => { 
+	$.ajax({
+        url: 'settings.json',
+		type: 'GET', dataType: 'json',
+		success: function(responseJSON, status, xhr) {
+			
+			urlAd = responseJSON.url;
+			port = responseJSON.port;
+			sampleTimeSec = +responseJSON.sampleTime;
+			sampleTimeMsec = sampleTimeMsec / 1000;
+			maxSamplesNumber = +responseJSON.maxSamplesNum;
 
-	getSettings();
-
+			
+			
+		},
+	});
+	
 	startTimer();
 	chartInit();
 	showClick();

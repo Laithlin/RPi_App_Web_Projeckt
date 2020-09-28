@@ -2,23 +2,23 @@
 * Web script for Rpi to use SenseHat IMU sensors
 * Based on materials from  classes
 * author: Justyna S.
-*/
+*/ 
 
 /**
 * @brief variables for script
 */
 
-const sampleTimeSec = 0.1;
+const sampleTimeSec = 0.1; 	
 const sampleTimeMsec = 1000*sampleTimeSec;
-const maxSamplesNumber = 100;
+const maxSamplesNumber = 100;	
 
-var timer;
+var timer; 
 
 var urlData = "http://192.168.8.126/RPi_App_Web_Projeckt/server/data.json";
-var urlSet = "http://192.168.8.126/RPi_App_Web_Projeckt/server/settings.json";
+var urlSet = "http://192.168.1.126/web/settings.json";
 
 /**
-* @brief overwrite variables settings data,
+* @brief overwrite variables settings data, 
 * 			which are url, port, sample time and maximum sample number
 */
 
@@ -40,7 +40,7 @@ function addSampleTime(s) {
 function addMaxSampleNumber(m) {
 	maxSampleNumber = m;
 	return maxSampleNum;
-}
+} 
 
 /**
 * @brief receiving settings JSON data from sevrer
@@ -64,7 +64,7 @@ function addRow(a, b, c) {
 	var cell1 = row.insertCell(0);
 	var cell2 = row.insertCell(1);
 	var cell3 = row.insertCell(2);
-
+	
 	cell1.innerHTML = a;
 	cell2.innerHTML = b;
 	cell3.innetHTML = c;
@@ -72,7 +72,7 @@ function addRow(a, b, c) {
 
 function removeData(r) {
 	var table = document.getElementById("sensors");
-
+	
 	for(var i=r, i<2*r; i++)
 	{
 		table.deleteRow(i);
@@ -87,7 +87,7 @@ function addData(d) {
 		addRow(obj[i].name, obj[i].value, obj[i].unit);
 		amount++;
 	}
-
+	
 	removeData(amount);
 }
 
@@ -96,7 +96,7 @@ function ajaxJSON() {
 		type: 'GET', dataType: 'json',
 		success: function(responseJSON, status, xhr) {
 			addData(+responseJSON.data);
-
+			
 		}
 	});
 }
@@ -105,9 +105,9 @@ function startTimer(){
 	timer = setInterval(ajaxJSON, sampleTimeMsec);
 }
 
-$(document).ready(() => {
+$(document).ready(() => { 
 	getSettings();
 	startTimer();
-
+	
 
 });
