@@ -1,0 +1,85 @@
+﻿<Window x:Class="DesktopDataGrabber.View.Leds"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:vm="clr-namespace:DesktopDataGrabber.ViewModel"
+        mc:Ignorable="d"
+        Title="Desktop app for Rpi" 
+        MinHeight="700" MinWidth="900"
+        MaxHeight="900" MaxWidth="1300">
+    <Window.DataContext>
+        <vm:LedsModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Menu toggle button -->
+        <Button 
+            Grid.Row="0" Grid.Column="1"
+            x:Name="MenuBtn" Click="MenuBtn_Click"
+            Width="70" HorizontalAlignment="Left" Margin="15,5">
+            Menu
+        </Button>
+        <!-- Menu grid -->
+        <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" 
+              x:Name="Menu"
+              Background="DarkCyan" Width="150" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Width="120" Margin="5" Click="TemperatureButton">TPH</Button>
+            <Button Grid.Row="1" Width="120" Margin="5" Click="RPYButton">RPY</Button>
+            <Button Grid.Row="2" Width="120" Margin="5" Click="LedsButton">LEDs</Button>
+            <Button Grid.Row="3" Width="120" Margin="5" Click="TableInfoButton">TABLE</Button>
+            <Button Grid.Row="4" Width="120" Margin="5" Click="JoyButton">JOYSTICK</Button>
+
+        </Grid>
+
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <!--<TextBox Grid.Row="0" Margin="15" Text="{Binding DiodaText}"></TextBox>-->
+            <TextBox Grid.Row="1" Margin="15" Text="{Binding LedX}"></TextBox>
+            <TextBox Grid.Row="2" Margin="15" Text="{Binding LedY}"></TextBox>
+            <TextBox Grid.Row="3" Margin="15" Text="{Binding LedColor}"></TextBox>
+            
+        </Grid>
+     
+
+
+        <Grid Grid.Row="3" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button 
+                Grid.Column="0"
+                Height="30" 
+                Width="150"
+                Margin="0,10,30,10" 
+                Command="{Binding SetDiodsButton}" HorizontalAlignment="Center">
+                USTAW DIODY
+            </Button>
+
+        </Grid>
+    </Grid>
+</Window>
+
