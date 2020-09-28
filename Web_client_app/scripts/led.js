@@ -8,8 +8,8 @@ var sampleTime = 0.1;
 var sampleTimeMsek = sampleTime*1000;
 var maxSampleNum = 100;
 var port = 22;
-var urlData = "http://192.168.1.126/app/led_display.php";
-var urlSet = "http://192.168.1.126/app/settings.json";;
+var urlData = "http://192.168.8.126/RPi_App_Web_Projeckt/server/led_display.php";
+var urlSet = "http://192.168.8.126/RPi_App_Web_Projeckt/server/settings.json";;
 
 function addUrl(t) {
 	urlData = t + "led_display.php";
@@ -29,7 +29,7 @@ function addSampleTime(s) {
 function addMaxSampleNumber(m) {
 	maxSampleNum = m;
 	return maxSampleNum;
-} 
+}
 
 function getSettings() {
 	$.ajax(urlSet, {
@@ -66,7 +66,7 @@ function SendClearRequest(){
 function SendMatrix(){
   var msgArray = [];
   for (var i = 0; i < btnIndexArray.length; i++) {
-    
+
     if(LedColorNotNull(btnIndexArray[i])){
       var x = btnIndexArray[i][1];
       var y = btnIndexArray[i][2];
@@ -90,7 +90,7 @@ function LedColorNotNull(idx){
 function RGBToValue(color){
   color = color.toString();
   var str = color.slice(color.indexOf("(")+1,color.indexOf(")"));
-  
+
   return str;
 }
 
@@ -118,7 +118,7 @@ function WebAppInit(){
       //creating array for clearing the display
       var clrValue = "["+x.toString()+","+y.toString()+",0,0,0]";
       clrIndexArray.push(clrValue.toString());
-      
+
       msgMap.set(idx,clrValue);
     }
   }
@@ -127,6 +127,6 @@ function WebAppInit(){
 $(document).ready(()=>{
 	getSettings();
   WebAppInit();
-  
+
 
 });

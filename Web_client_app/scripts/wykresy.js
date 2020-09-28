@@ -3,35 +3,35 @@
 * Web script for Rpi to use SenseHat THP sensors
 * Based on materials from  classes
 * author: Justyna S.
-*/ 
+*/
 
 /**
 * @brief variables for script
 */
-const sampleTimeSec = 0.1; 					
-const sampleTimeMsec = 1000*sampleTimeSec;	
-const maxSamplesNumber = 100;				
+const sampleTimeSec = 0.1;
+const sampleTimeMsec = 1000*sampleTimeSec;
+const maxSamplesNumber = 100;
 
-var xdata; 
-var tdata;  
-var pdata;  
-var hdata;  
-var lastTimeStamp; 
+var xdata;
+var tdata;
+var pdata;
+var hdata;
+var lastTimeStamp;
 
-var chartContextTemp;  
+var chartContextTemp;
 var chartContextPres;
 var chartContextHum;
 var temp;
 var pres;
 var hum;
 
-var timer; 
+var timer;
 
-var urlData = 'http://192.168.56.103/web/data.json';
-var urlSet = "http://192.168.1.126/web/settings.json";
+var urlData = 'http://192.168.8.126/RPi_App_Web_Projeckt/server/data.json';
+var urlSet = "http://192.168.8.126/RPi_App_Web_Projeckt/server/settings.json";
 
 /**
-* @brief overwrite variables settings data, 
+* @brief overwrite variables settings data,
 * 			which are url, port, sample time and maximum sample number
 */
 
@@ -53,7 +53,7 @@ function addSampleTime(s) {
 function addMaxSampleNumber(m) {
 	maxSampleNum = m;
 	return maxSampleNum;
-} 
+}
 
 /**
 * @brief receiving settings JSON data from sevrer
@@ -109,10 +109,10 @@ function addDataHum(h){
 }
 
 /**
-* @brief removing old data 
+* @brief removing old data
 *
-* when length of data container is greater than 
-* maximum sample number, first receiving data are removed 
+* when length of data container is greater than
+* maximum sample number, first receiving data are removed
 */
 
 function removeOldData(){
@@ -154,23 +154,23 @@ function ajaxJSON() {
 }
 
 /**
-* @brief initialization of the figure 
+* @brief initialization of the figure
 */
 
 function chartInit()
 {
 
-	xdata = [...Array(maxSamplesNumber).keys()]; 
+	xdata = [...Array(maxSamplesNumber).keys()];
 
 	xdata.forEach(function(p, i) {this[i] = (this[i]*sampleTimeSec).toFixed(4);}, xdata);
 
 
-	lastTimeStamp = +xdata[xdata.length-1]; 
+	lastTimeStamp = +xdata[xdata.length-1];
 
 
 	tdata = [];
-	pdata = []; 
-	hdata = []; 
+	pdata = [];
+	hdata = [];
 
 	// get chart context from 'canvas' element
 	chartContextTemp = $("#temp")[0].getContext('2d');
@@ -214,7 +214,7 @@ function chartInit()
 				}]
 			}
 		}
-		
+
 	});
 	pres = new Chart(chartContextPres, {
 		// The type of chart: linear plot
@@ -253,7 +253,7 @@ function chartInit()
 				}]
 			}
 		}
-		
+
 	});
 	hum = new Chart(chartContextHum, {
 		// The type of chart: linear plot
@@ -292,9 +292,9 @@ function chartInit()
 				}]
 			}
 		}
-		
+
 	});
-	
+
 	tdata = temp.data.datasets[0].data;
 	pdata = pres.data.datasets[0].data;
 	hdata = hum.data.datasets[0].data;
@@ -303,7 +303,7 @@ function chartInit()
 	xdata = hum.data.labels;
 }
 
-$(document).ready(() => { 
+$(document).ready(() => {
 	getSettings();
 	chartInit();
 	$("#start").click(startTimer);

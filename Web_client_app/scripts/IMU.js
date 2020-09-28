@@ -3,37 +3,37 @@
 * Web script for Rpi to use SenseHat IMU sensors
 * Based on materials from  classes
 * author: Justyna S.
-*/ 
+*/
 
 /**
 * @brief variables for script
 */
 
-const sampleTimeSec = 0.1; 	
+const sampleTimeSec = 0.1;
 const sampleTimeMsec = 1000*sampleTimeSec;
-const maxSamplesNumber = 100;	
+const maxSamplesNumber = 100;
 var datar;
 var datap;
 var datay;
 
 
-var xdata;  
-var lastTimeStamp; 
+var xdata;
+var lastTimeStamp;
 
-var chartContextRoll;  
+var chartContextRoll;
 var chartContextPitch;
 var chartContextYaw;
 var roll;
 var pitch;
 var yaw;
 
-var timer; 
+var timer;
 
-var urlData = "http://192.168.8.126/web/data.json";
-var urlSet = "http://192.168.1.126/web/settings.json";;
+var urlData = "http://192.168.8.126/RPi_App_Web_Projeckt/server/data.json";
+var urlSet = "http://192.168.8.126/RPi_App_Web_Projeckt/server/settings.json";;
 
 /**
-* @brief overwrite variables settings data, 
+* @brief overwrite variables settings data,
 * 			which are url, port, sample time and maximum sample number
 */
 
@@ -55,7 +55,7 @@ function addSampleTime(s) {
 function addMaxSampleNumber(m) {
 	maxSampleNumber = m;
 	return maxSampleNum;
-} 
+}
 
 /**
 * @brief receiving settings JSON data from sevrer
@@ -111,10 +111,10 @@ function addDataIMUY(y){
 }
 
 /**
-* @brief removing old data 
+* @brief removing old data
 *
-* when length of data container is greater than 
-* maximum sample number, first receiving data are removed 
+* when length of data container is greater than
+* maximum sample number, first receiving data are removed
 */
 
 function removeOldData(){
@@ -129,13 +129,13 @@ function removeOldData(){
 */
 
 =======
-const sampleTimeSec = 0.1; 	
+const sampleTimeSec = 0.1;
 const sampleTimeMsec = 1000*sampleTimeSec;
 var datar = 0;
 var datap = 0;
 var datay = 0;
 
-var url = "http://192.168.8.126/webapp/joystick.php";
+var url = "http://192.168.8.126/RPi_App_Web_Projeckt/server/joystick.php";
 
 
 function addDataIMUR(r)
@@ -193,23 +193,23 @@ function ajaxJSON() {
 
 
 /**
-* @brief initialization of the figure 
+* @brief initialization of the figure
 */
 
 function chartInit()
 {
 
-	xdata = [...Array(maxSamplesNumber).keys()]; 
+	xdata = [...Array(maxSamplesNumber).keys()];
 
 	xdata.forEach(function(p, i) {this[i] = (this[i]*sampleTimeSec).toFixed(4);}, xdata);
 
 
-	lastTimeStamp = +xdata[xdata.length-1]; 
+	lastTimeStamp = +xdata[xdata.length-1];
 
 
 	datar = [];
-	datap = []; 
-	datay = []; 
+	datap = [];
+	datay = [];
 
 	// get chart context from 'canvas' element
 	chartContextRoll = $("#roll")[0].getContext('2d');
@@ -253,7 +253,7 @@ function chartInit()
 				}]
 			}
 		}
-		
+
 	});
 	pitch = new Chart(chartContextPitch, {
 		// The type of chart: linear plot
@@ -292,7 +292,7 @@ function chartInit()
 				}]
 			}
 		}
-		
+
 	});
 	yaw = new Chart(chartContextYaw, {
 		// The type of chart: linear plot
@@ -331,9 +331,9 @@ function chartInit()
 				}]
 			}
 		}
-		
+
 	});
-	
+
 	datar = roll.data.datasets[0].data;
 	datap = pitch.data.datasets[0].data;
 	datay = yaw.data.datasets[0].data;
@@ -344,7 +344,7 @@ function chartInit()
 
 
 
-$(document).ready(() => { 
+$(document).ready(() => {
 	getSettings();
 	chartInit();
 	$("#start").click(startTimer);
@@ -356,13 +356,13 @@ function schowClick()
 	var roll_d = "Roll:" + datar;
 	var pitch_d = "Pitch:" + datap;
 	var yaw_d = "Yaw:" + datay;
-	
+
 	document.getElementById("roll_data").innerHTML = roll_d;
 	document.getElementById("pitch_data").innerHTML = pitch_d;
 	document.getElementById("yaw_data").innerHTML = yaw_d;
 }
 
-$(document).ready(() => { 
+$(document).ready(() => {
 	startTimer();
 	showClick();
 
